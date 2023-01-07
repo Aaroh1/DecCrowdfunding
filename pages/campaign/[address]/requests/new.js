@@ -22,11 +22,13 @@ export default function New(props) {
       setload(false);
       if (!rec || !desc || !value) throw Error("Please fill all Entries");
       const acc = await web3.eth.getAccounts();
-      console.log(props.currentCamp)
+      //(props.currentCamp)
       const instance = await camp(props.currentCamp);
-      await instance.methods.createRequest(desc, web3.utils.toWei(value.toString(),'ether'),rec).send({
-        from: acc[0],
-      });
+      await instance.methods
+        .createRequest(desc, web3.utils.toWei(value.toString(), "ether"), rec)
+        .send({
+          from: acc[0],
+        });
       setload(true);
     } catch (err) {
       setload(true);
@@ -37,6 +39,9 @@ export default function New(props) {
     <PageLayout>
       <Link href={`/campaign/${props.currentCamp}/requests`}>Back</Link>
       <h1>Make Request</h1>
+      <h3 className="content-center">
+        <u>Balance of Contract: {props.balance} eth</u>
+      </h3>
       <Form onSubmit={submit} error={!!err}>
         <Form.Field>
           <Label style={{ marginBottom: "10px" }}>Description</Label>
@@ -57,7 +62,8 @@ export default function New(props) {
             label="eth"
             type="Number"
             min="0"
-            step='0.001'
+            max={props.balance}
+            step="0.001"
             labelPosition="right"
             value={value}
             fluid
@@ -102,9 +108,12 @@ export default function New(props) {
 export async function getServerSideProps(context) {
   const { params } = context;
   const { address } = params;
+  const balanceinWei = await web3.eth.getBalance(address);
+  const balance = await web3.utils.fromWei(balanceinWei, "ether");
   return {
     props: {
       currentCamp: address,
+      balance,
     },
   };
 }

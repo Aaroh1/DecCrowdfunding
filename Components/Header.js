@@ -7,18 +7,22 @@ export default function Header()
     return (
       <div>
         <Sticky>
-          <Menu color='teal' fluid size="huge" style={{ marginBottom: "5vh" }}>
+          <Menu color='teal' size="huge" widths={5} style={{ marginBottom: "5vh" }}>
+          <Menu.Item>
             <Link href="/">
-              FundMe
+              DecCrowdFund
             </Link>
-            <Menu.Menu position="right">
+            </Menu.Item>
+            <Menu.Item>
               <Link href='/'>
                     View Campaigns             
               </Link>
+              </Menu.Item> 
+              <Menu.Item>
               <Link href="/campaign/new">
                   <Icon name="add"></Icon>
               </Link>
-            </Menu.Menu>
+            </Menu.Item>
           </Menu>
         </Sticky>
       </div>

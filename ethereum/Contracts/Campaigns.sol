@@ -38,7 +38,7 @@ contract Campaign {
     }
 
     modifier restriction() {
-        require(msg.value > 0);
+        require(msg.value > minContribution);
         _;
     }
     modifier isManager() {
@@ -47,10 +47,10 @@ contract Campaign {
     }
 
     function contribute() public payable restriction {
-        if (!approvers[msg.sender]) {
-            approvers[msg.sender] = true;
+        if (approvers[msg.sender] == false ) {
             Numofapprovers++;
         }
+        approvers[msg.sender] = true;
     }
 
     function createRequest(
@@ -98,10 +98,16 @@ contract Campaign {
         );
     }
 
-    function alreadyApproved(address approver)external view returns (bool)
+    function isContributor(address approver)external view returns (bool)
     {
         return (approvers[approver]==true);
     }
+
+    function hasAlreadyApproved(uint index) public view returns (bool) {
+        Request storage req = requests[index];
+        return (req.approvals[msg.sender] == true);
+    }
+
 
     function getNumRequests() public view returns (uint) {
         return numRequests;

@@ -25,7 +25,7 @@ function Home(props) {
             labelPosition="right"
           />
           </Link>
-          <Card.Group stackable={true} items={opencamps} centered></Card.Group>
+         {(opencamps)?<Card.Group stackable={true} items={opencamps} centered></Card.Group>:<p>No Campaigns Open Yet..</p>}
         </div>
       </Layouts>
     </>
@@ -35,11 +35,6 @@ Home.getInitialProps = async (ctx) => {
   const deployedcampaigns = await instance.methods
     .getDeployedCampaigns()
     .call();
-
-  // const deployedcampaigns = await instance.methods.deployedCampaigns('1').call();
-  console.log(deployedcampaigns);
-
-  // instance.methods.getDeployedCampaigns.call().then(console.log())
   return { camps: deployedcampaigns };
 };
 export default Home;

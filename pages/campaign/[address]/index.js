@@ -3,7 +3,7 @@ import Link from "next/link";
 import PageLayout from "../../../Components/PageLayout";
 import Contribute from "../../../Components/Contribute";
 import Campaign from "../../../ethereum/campaign";
-import web3 from 'web3';
+import web3 from "web3";
 import { Button, Card, Grid, GridColumn } from "semantic-ui-react";
 export default function View(props) {
   const { currentCamp, summary } = props;
@@ -36,7 +36,7 @@ export default function View(props) {
       style: { overflowWrap: "break-word" },
     },
     {
-      header: web3.utils.fromWei(summary["1"],'ether'),
+      header: web3.utils.fromWei(summary["1"], "ether"),
       meta: "Campaign Balance(ether)",
       description:
         "The balance denotes the money left to be spent on the campaign",
@@ -44,7 +44,7 @@ export default function View(props) {
     },
   ];
   useEffect(() => {
-    console.log(props.summary);
+    //(props.summary);
   }, []);
   return (
     <PageLayout>
@@ -56,7 +56,9 @@ export default function View(props) {
           </Grid.Column>
           <Grid.Column width={5}>
             <Contribute address={currentCamp} />
-            <Link href={`${currentCamp}/requests`}><Button color="sky blue" >View Requests</Button></Link>
+            <Link href={`${currentCamp}/requests`}>
+              <Button color="sky blue">View Requests</Button>
+            </Link>
           </Grid.Column>
         </Grid.Row>
       </Grid>
@@ -64,11 +66,11 @@ export default function View(props) {
   );
 }
 export async function getServerSideProps(context) {
-  const { params } = context; 
+  const { params } = context;
   const { address } = params;
   const campinstance = Campaign(address);
   const summary = await campinstance.methods.SummariseCampaign().call();
-  console.log({ ...summary });
+  //({ ...summary });
   return {
     props: {
       currentCamp: address,
