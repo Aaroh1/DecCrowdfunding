@@ -29,6 +29,10 @@ export default function New(props) {
         .send({
           from: acc[0],
         });
+      alert("Request registered successfully");
+      setdesc("");
+      setvalue(0);
+      setrec("");
       setload(true);
     } catch (err) {
       setload(true);
@@ -56,7 +60,7 @@ export default function New(props) {
           />
         </Form.Field>
         <Form.Field>
-          <Label style={{ marginBottom: "10px" }}>Value in wei</Label>
+          <Label style={{ marginBottom: "10px" }}>Value in eth</Label>
           <Input
             placeholder="Value in ether"
             label="eth"

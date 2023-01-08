@@ -25,16 +25,19 @@ export default function index(props) {
   const requestRows = () => {
     return requests.map((ele, index) => {
       return (
-        <RowComp requests={ele} id={index} key={index} address={props.address} />
+        <RowComp
+          requests={ele}
+          id={index}
+          key={index}
+          address={props.address}
+        />
       );
     });
   };
 
   return (
     <PageLayout>
-      {<Link href={`/campaign/${props.address}/requests/new`}>
-        <Button primary>Make a Request</Button>
-      </Link>}
+    <Link href={`/campaign/${props.address}`}>Back</Link>
       <Table celled structured striped textAlign="center" singleLine>
         <Table.Header>
           <Table.Row>
@@ -49,14 +52,19 @@ export default function index(props) {
         </Table.Header>
         <Table.Body>{requestRows()}</Table.Body>
       </Table>
+      <Link href={`/campaign/${props.address}/requests/new`}>
+        <Button primary className="m-auto">
+          Make a Request
+        </Button>
+      </Link>
     </PageLayout>
   );
 }
 export async function getServerSideProps(context) {
   const { params } = context;
-  const { address } = params; 
+  const { address } = params;
   const instance = await camp(address);
-  const size = await instance.methods.getNumRequests().call();  
+  const size = await instance.methods.getNumRequests().call();
   return {
     props: {
       address: address,

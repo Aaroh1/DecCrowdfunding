@@ -10,14 +10,18 @@ export default function RowComp(props) {
   let account;
   useEffect(() => {
     (async () => {
-      instance = await camp(props.address);
+     try{ instance = await camp(props.address);
       account = await web3.eth.getAccounts();
       setallow1(await instance.methods.isContributor(account[0]).call());
       setallow2(
         await instance.methods
           .hasAlreadyApproved(props.id)
           .call({ from: account[0] })
-      );
+      );}
+      catch(e)
+      {
+        alert("Successfully connected to a web3 wallet")
+      }
     })();
   }, [instance, isallowed2, isallowed1, account]);
 
