@@ -1,6 +1,6 @@
 # Decentralized Crowdfunding Website
 
-Welcome to our decentralized crowdfunding website, built using Next.js and Web3.js! This platform allows creators to launch campaigns and accept contributions from backers, with the funds being held on the Ethereum blockchain.
+Welcome to this decentralized crowdfunding website, built using Next.js and Web3.js! This platform allows creators to launch campaigns and accept contributions from backers, with the funds being held on the Ethereum blockchain.
 
 ## Features
 
