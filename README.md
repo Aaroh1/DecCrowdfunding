@@ -20,6 +20,7 @@ Welcome to our decentralized crowdfunding website, built using Next.js and Web3.
 ## Tech Stack Used:
 
 - Next.js
+- Tailwind
 - Web3.js
 - Ethereum
 - Solidity
